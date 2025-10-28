@@ -8481,26 +8481,55 @@ Facebook: facebook.com/worryfreemovers
 
       // Expose function for external button - properly reference the internal function
 window.openWFMChat = function() {
+    console.log('🎯 openWFMChat called');
+
     // Directly reference the chat elements and state
     const container = document.getElementById('wfm-chat-container');
     const widget = document.getElementById('wfm-chat-widget');
     const toggle = document.getElementById('wfm-chat-toggle');
-    
+
+    console.log('📦 Elements found:', {
+        container: !!container,
+        widget: !!widget,
+        toggle: !!toggle
+    });
+
+    if (!container) {
+        console.error('❌ Chat container not found - Sarah AI may not be loaded');
+        alert('Chat is loading... Please try again in a moment.');
+        return false;
+    }
+
     if (container && widget) {
         // Show the container and widget
         container.style.display = 'block';
         widget.style.display = 'flex';
         if (toggle) toggle.style.display = 'none';
-        
+
+        console.log('✅ Chat opened');
+
         // Check if we need to start the conversation
         const messages = document.getElementById('wfm-chat-messages');
         if (messages && messages.children.length === 0) {
+            console.log('🚀 Starting conversation...');
             // Trigger the chat to start
-            const event = new Event('click');
-            toggle && toggle.dispatchEvent(event);
+            if (typeof init === 'function') {
+                init();
+            } else if (toggle) {
+                const event = new Event('click');
+                toggle.dispatchEvent(event);
+            }
         }
+        return true;
+    } else {
+        console.error('❌ Chat widget not available');
+        alert('Chat is not available right now. Please call us at 330-435-8686');
+        return false;
     }
 };
+
+// Also expose a simpler version
+window.openChat = window.openWFMChat;
 
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
