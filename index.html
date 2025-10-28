@@ -8531,6 +8531,16 @@ window.openWFMChat = function() {
 // Also expose a simpler version
 window.openChat = window.openWFMChat;
 
+// Make sure the toggle button is globally accessible for header buttons
+window.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('wfm-chat-toggle');
+    if (toggle) {
+        console.log('✅ Sarah AI chat toggle is ready');
+        // Dispatch a custom event to let the page know chat is available
+        window.dispatchEvent(new CustomEvent('sarahAIReady'));
+    }
+});
+
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
