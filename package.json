@@ -1,0 +1,12 @@
+{
+  "name": "sarah-ai-chatbot",
+  "version": "1.0.0",
+  "description": "Worry Free Moving - Sarah AI Chatbot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
